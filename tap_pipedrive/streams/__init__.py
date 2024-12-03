@@ -14,11 +14,12 @@ from .recents.dynamic_typing.products import RecentProductsStream
 from .dealflow import DealStageChangeStream
 from .deal_products import DealsProductsStream
 from .deal_fields import DealFields
+from .organization_relationships import OrganizationRelationshipsStream
 
 
 __all__ = ['CurrenciesStream', 'ActivityTypesStream', 'FiltersStream', 'StagesStream', 'PipelinesStream',
            'RecentUsersStream', 'RecentFilesStream',
            'RecentNotesStream', 'RecentActivitiesStream', 'RecentDealsStream', 'RecentOrganizationsStream',
            'RecentPersonsStream', 'RecentProductsStream', 'DealStageChangeStream', 'DealsProductsStream',
-           'DealFields'
+           'DealFields', 'OrganizationRelationshipsStream'
            ]

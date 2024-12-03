@@ -1,0 +1,42 @@
+{
+    "type": ["null", "object", "array"],
+        "items": { "type": "object" },
+        "properties": {
+            "related_organization_name": {
+                "type": ["null", "string"]
+            },
+            "calculated_type": {
+                "type": ["null", "string"]
+            },
+            "calculated_related_org_id": {
+                "type": ["null", "integer"]
+            },
+            "id": {
+                "type": ["null", "integer"]
+            },
+            "org_id": {
+                "type": ["null", "integer"]
+            },
+            "type": {
+                "type": ["null", "string"]
+            },
+            "rel_owner_org_id": {
+                "type": ["null", "integer", "string"]
+            },
+            "rel_linked_org_id": {
+                "type": ["null", "integer", "string"]
+            },
+            "add_time": {
+                "type": ["null", "string"],
+                "format": "date-time"
+            },
+            "update_time": {
+                "type": ["null", "string"],
+                "format": "date-time"
+            },
+            "active_flag": {
+                "type": ["null", "boolean"]
+            }
+        }
+}
+  

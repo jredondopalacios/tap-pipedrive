@@ -20,12 +20,6 @@
             "type": {
                 "type": ["null", "string"]
             },
-            "rel_owner_org_id": {
-                "type": ["null", "integer", "string"]
-            },
-            "rel_linked_org_id": {
-                "type": ["null", "integer", "string"]
-            },
             "add_time": {
                 "type": ["null", "string"],
                 "format": "date-time"

@@ -1,7 +1,7 @@
 import singer
-from tap_pipedrive.stream import PipedriveIterStream
+from tap_pipedrive.stream import PipedriveBaseIterStream
 
-class OrganizationRelationshipsStream(PipedriveIterStream):
+class OrganizationRelationshipsStream(PipedriveBaseIterStream):
     base_endpoint = 'organizations'
     id_endpoint = 'organizationRelationships?org_id={}'
     schema = 'organization_relationships'

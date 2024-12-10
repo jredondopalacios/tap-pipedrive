@@ -143,8 +143,6 @@ class PipedriveIterStream(PipedriveStream):
         # create checkpoint at inital_state to only find stage changes more recent than initial_state (bookmark)
         checkpoint = self.initial_state
 
-        logger.info('Syncing stream {} from {}'.format(self.schema, checkpoint, self.stream_start))
-
         while self.more_items_in_collection:
             self.endpoint = self.base_endpoint
 
@@ -162,9 +160,6 @@ class PipedriveIterStream(PipedriveStream):
             self.more_ids_to_get = self.more_items_in_collection  # note if there are more pages of ids to get
             self.next_start = self.start  # note pagination for next loop
 
-            logger.info('Stream has {} items'.format(len(response.json().get('data', []))))
-            logger.info('Stream next start is {}'.format(self.start))
-
             if not response.json().get('data'):
                 continue
 
@@ -173,18 +168,15 @@ class PipedriveIterStream(PipedriveStream):
 
             self.these_deals = this_page_ids  # need the list of deals to check for last id in the tap
             for deal_id in this_page_ids:
-                logger.info('Found deal id {}'.format(deal_id))
                 yield deal_id
 
 
     def find_deal_ids(self, data, start, stop):
-        logger.info('Finding deal ids for stream {} from {} to {}'.format(self.schema, start, stop))
         # find all deals that were *added* after the start time and before the stop time
         added_ids = [data[i]['id']
                      for i in range(len(data))
                      if (data[i]['add_time'] is not None
                          and start <= pendulum.parse(data[i]['add_time']) < stop)]
-        logger.info('Found {} deals added in this page'.format(len(added_ids)))
 
         # find all deals that a) had a stage change at any time (i.e., the stage_change_time is not None),
         #                     b) had a stage change after the start time and before the stop time, and
@@ -208,8 +200,6 @@ class PipedriveBaseIterStream(PipedriveStream):
         # create checkpoint at inital_state to only find stage changes more recent than initial_state (bookmark)
         checkpoint = self.initial_state
 
-        logger.info('Syncing stream {} from {}'.format(self.schema, checkpoint, self.stream_start))
-
         while self.more_items_in_collection:
             self.endpoint = self.base_endpoint
 
@@ -227,9 +217,6 @@ class PipedriveBaseIterStream(PipedriveStream):
             self.more_ids_to_get = self.more_items_in_collection  # note if there are more pages of ids to get
             self.next_start = self.start  # note pagination for next loop
 
-            logger.info('Stream has {} items'.format(len(response.json().get('data', []))))
-            logger.info('Stream next start is {}'.format(self.start))
-
             if not response.json().get('data'):
                 continue
 
@@ -238,18 +225,15 @@ class PipedriveBaseIterStream(PipedriveStream):
 
             self.these_deals = this_page_ids  # need the list of deals to check for last id in the tap
             for deal_id in this_page_ids:
-                logger.info('Found deal id {}'.format(deal_id))
                 yield deal_id
 
 
     def find_deal_ids(self, data, start, stop):
-        logger.info('Finding deal ids for stream {} from {} to {}'.format(self.schema, start, stop))
         # find all deals that were *added* after the start time and before the stop time
         added_ids = [data[i]['id']
                      for i in range(len(data))
                      if (data[i]['add_time'] is not None
                          and start <= pendulum.parse(data[i]['add_time']) < stop)]
-        logger.info('Found {} deals added in this page'.format(len(added_ids)))
 
         # find all deals that a) had a stage change at any time (i.e., the stage_change_time is not None),
         #                     b) had a stage change after the start time and before the stop time, and
